@@ -32,14 +32,16 @@ jobs:
       - name: Extract version from tag
         run: echo "VERSION=${GITHUB_REF#refs/tags/}" >> $GITHUB_ENV
 
-      # Optional: keep manifest.json version in sync with the tag
       - name: Bump manifest.json version
         run: |
           node - <<'NODE'
           const fs = require('fs');
-          const m = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          const m = JSON.parse(fs.readFileSync('manifest.json', 'utf8'));
           m.version = process.env.VERSION;
-          fs.writeFileSync('package.json', JSON.stringify(m, null, 2));
+          fs.writeFileSync('manifest.json', JSON.stringify(m, null, 2));
+          const p = JSON.parse(fs.readFileSync('package.json', 'utf8'));
+          p.version = process.env.VERSION;
+          fs.writeFileSync('package.json', JSON.stringify(p, null, 2));
           NODE
 
       - name: Build signed XPI
