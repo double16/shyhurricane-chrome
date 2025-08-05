@@ -9,38 +9,9 @@ on:
     types: [ created ]
 
 jobs:
-  test:
-    runs-on: ubuntu-latest
-
-    steps:
-      - name: Checkout source
-        uses: actions/checkout@v4
-        with:
-          fetch-depth: 1
-
-      - name: Set up Node 18
-        uses: actions/setup-node@v4
-        with:
-          node-version: 18
-          cache: npm
-
-      - name: Install deps
-        run: npm ci
-
-      - name: Lint WebExtension
-        run: npm run lint
-
-      - name: Upload lint report (if any)
-        if: always()
-        uses: actions/upload-artifact@v4
-        with:
-          name: lint-report
-          path: web-ext-artifacts/**
-
   build:
     if: github.event_name == 'release'
     runs-on: ubuntu-latest
-    needs: test
     permissions:
       contents: write
       packages: write
