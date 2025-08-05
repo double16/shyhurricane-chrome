@@ -1,0 +1,20 @@
+{
+  "name": "shyhurricane",
+  "version": "1.0.0",
+  "description": "Chrome extension that forwards HTTP traffic to the ShyHurricane MCP server.",
+  "author": "Patrick Double",
+  "license": "",
+  "private": true,
+  "scripts": {
+    "clean": "rimraf dist shyhurricane-chrome.zip",
+    "copy": "mkdirp dist && shx cp manifest.json background.js options.js options.html dist/",
+    "build": "npm run clean && npm run copy && cd dist && zip -r ../shyhurricane-chrome-$npm_package_version.zip .",
+    "run": "web-ext run --target chromium --no-input"
+  },
+  "devDependencies": {
+    "mkdirp": "^2.1.5",
+    "rimraf": "^5.0.5",
+    "shx": "^0.3.4",
+    "web-ext": "^8.9.0"
+  }
+}
