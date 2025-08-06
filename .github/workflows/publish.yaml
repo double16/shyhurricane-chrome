@@ -2,6 +2,9 @@ name: Build & Publish Chrome Add-On
 
 on:
   push:
+    paths-ignore:
+      - '**.md'
+      - 'docs/**'
     branches: [ main ]
   pull_request:
     branches: [ main ]

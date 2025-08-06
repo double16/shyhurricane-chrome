@@ -48,7 +48,7 @@ const shouldSkip = ct => {
 const toKatanaHeaders = obj => {
     const out = {};
     for (const [name, value] of Object.entries(obj || {})) {
-        const k = name.toLowerCase().replace(/-/g, "_");
+        const k = name.toLowerCase();
         out[k] = out[k] ? `${out[k]};${value}` : value;
     }
     return out;
