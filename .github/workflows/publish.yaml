@@ -47,10 +47,10 @@ jobs:
           fs.writeFileSync('package.json', JSON.stringify(p, null, 2));
           NODE
 
-      - name: Build signed XPI
+      - name: Build zip
         run: npm run build
 
-      - name: Upload XPI to this release
+      - name: Upload zip to this release
         uses: softprops/action-gh-release@v2
         with:
           fail_on_unmatched_files: true
